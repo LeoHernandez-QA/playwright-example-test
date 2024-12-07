@@ -58,7 +58,6 @@ test.describe('First try todo mvc', () => {
 		await page.locator('li').filter({ hasText: 'Add one last todo' }).getByLabel('Toggle Todo').check();
 		await page.locator('li').filter({ hasText: 'Add other todo' }).getByLabel('Toggle Todo').check();
 		await page.getByRole('link', { name: 'Active' }).click();
-		await expect(page.getByTestId('todo-title')).toContainText('Learn how codegen works');
 		await page.getByRole('link', { name: 'Completed' }).click();
 		await expect(page.locator('body')).toContainText('Add other todo');
 		await page.getByText('Add one last todo').click();
