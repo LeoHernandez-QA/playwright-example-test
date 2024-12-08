@@ -9,6 +9,7 @@ env:
   AZCOPY_SPA_APPLICATION_ID: '${{ secrets.AZCOPY_SPA_APPLICATION_ID }}'
   AZCOPY_SPA_CLIENT_SECRET: '${{ secrets.AZCOPY_SPA_CLIENT_SECRET }}'
   AZCOPY_TENANT_ID: '${{ secrets.AZCOPY_TENANT_ID }}'
+  AD_STORAGE_NAME: '${{ AD_STORAGE_NAME }}'
 jobs:
   test:
     timeout-minutes: 60
@@ -32,9 +33,9 @@ jobs:
         retention-days: 30
     - name: Debug Secrets
       run: |
-        if [ -z "${{ secrets.AZCOPY_SPA_APPLICATION_ID }}" ]; then echo "AZCOPY_SPA_APPLICATION_ID is missing"; fi
-        if [ -z "${{ secrets.AZCOPY_SPA_CLIENT_SECRET }}" ]; then echo "AZCOPY_SPA_CLIENT_SECRET is missing"; fi
-        if [ -z "${{ secrets.AZCOPY_TENANT_ID }}" ]; then echo "AZCOPY_TENANT_ID is missing"; fi
+        if [ -z "${{ vars.AD_STORAGE_NAME }}" ]; then echo "AD_STORAGE_NAME is missing"; fi
+        if [ -z "${{ env.AD_STORAGE_NAME }}" ]; then echo "AD_STORAGE_NAME is missing"; fi
+        if [ -z "$AD_STORAGE_NAME" ]; then echo "AD_STORAGE_NAME is missing"; fi
     - name: Upload HTML report to Azure
       shell: bash
       run: |
