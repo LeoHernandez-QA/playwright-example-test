@@ -31,14 +31,9 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-    - name: Debug Secrets
-      run: |
-        if [ -z "${{ vars.AD_STORAGE_NAME }}" ]; then echo "AD_STORAGE_NAME is missing"; fi
-        if [ -z "${{ env.AD_STORAGE_NAME }}" ]; then echo "AD_STORAGE_NAME is missing"; fi
-        if [ -z "$AD_STORAGE_NAME" ]; then echo "AD_STORAGE_NAME is missing"; fi
     - name: Upload HTML report to Azure
       shell: bash
       run: |
         REPORT_DIR='run-${{ github.run_id }}-${{ github.run_attempt }}'
-        azcopy cp --recursive "./playwright-report/*" "https://storagehernandez.blob.core.windows.net/\$web/$REPORT_DIR"
-        echo "::notice title=HTML report url::https://storagehernandez.z13.web.core.windows.net/$REPORT_DIR/index.html"
+        azcopy cp --recursive "./playwright-report/*" "https://${{ vars.AD_STORAGE_NAME }}.blob.core.windows.net/\$web/$REPORT_DIR"
+        echo "::notice title=HTML report url::https://${{ vars.AD_STORAGE_NAME }}.z13.web.core.windows.net/$REPORT_DIR/index.html"
