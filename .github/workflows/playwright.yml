@@ -25,17 +25,17 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Debug Secrets
+      run: |
+        if [ -z "${{ secrets.AZCOPY_SPA_APPLICATION_ID }}" ]; then echo "AZCOPY_SPA_APPLICATION_ID is missing"; fi
+        if [ -z "${{ secrets.AZCOPY_SPA_CLIENT_SECRET }}" ]; then echo "AZCOPY_SPA_CLIENT_SECRET is missing"; fi
+        if [ -z "${{ secrets.AZCOPY_TENANT_ID }}" ]; then echo "AZCOPY_TENANT_ID is missing"; fi
     - name: Upload HTML report to Azure
       shell: bash
       run: |
         REPORT_DIR='run-${{ github.run_id }}-${{ github.run_attempt }}'
         azcopy cp --recursive "./playwright-report/*" "https://storagehernandez.blob.core.windows.net/\$web/$REPORT_DIR"
         echo "::notice title=HTML report url::https://storagehernandez.z13.web.core.windows.net/$REPORT_DIR/index.html"
-    - name: Debug Secrets
-      run: |
-        if [ -z "${{ secrets.AZCOPY_SPA_APPLICATION_ID }}" ]; then echo "AZCOPY_SPA_APPLICATION_ID is missing"; fi
-        if [ -z "${{ secrets.AZCOPY_SPA_CLIENT_SECRET }}" ]; then echo "AZCOPY_SPA_CLIENT_SECRET is missing"; fi
-        if [ -z "${{ secrets.AZCOPY_TENANT_ID }}" ]; then echo "AZCOPY_TENANT_ID is missing"; fi
     env:
       AZCOPY_AUTO_LOGIN_TYPE: SPN
       AZCOPY_SPA_APPLICATION_ID: '${{ secrets.AZCOPY_SPA_APPLICATION_ID }}'
