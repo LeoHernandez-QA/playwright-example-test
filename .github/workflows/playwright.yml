@@ -29,11 +29,10 @@ jobs:
       shell: bash
       run: |
         REPORT_DIR='run-${{ github.run_id }}-${{ github.run_attempt }}'
-        azcopy cp --recursive "./playwright-report/*" "https://${{ env.STORAGE_ACCOUNT_NAME }}.blob.core.windows.net/\$web/$REPORT_DIR"
-        echo "::notice title=HTML report url::https://${{ env.STORAGE_ACCOUNT_NAME }}.z13.web.core.windows.net/$REPORT_DIR/index.html"
+        azcopy cp --recursive "./playwright-report/*" "https://storagehernandez.blob.core.windows.net/\$web/$REPORT_DIR"
+        echo "::notice title=HTML report url::https://storagehernandez.z13.web.core.windows.net/$REPORT_DIR/index.html"
       env:
         AZCOPY_AUTO_LOGIN_TYPE: SPN
         AZCOPY_SPA_APPLICATION_ID: '${{ secrets.AZCOPY_SPA_APPLICATION_ID }}'
         AZCOPY_SPA_CLIENT_SECRET: '${{ secrets.AZCOPY_SPA_CLIENT_SECRET }}'
         AZCOPY_TENANT_ID: '${{ secrets.AZCOPY_TENANT_ID }}'
-        STORAGE_ACCOUNT_NAME: '${{ vars.STORAGE_ACCOUNT_NAME }}'
