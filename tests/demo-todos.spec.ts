@@ -19,6 +19,7 @@
  * 
  * To open last HML report run:
  * npx playwright show-report 
+ * npx playwright show-report name-of-my-extracted-playwright-report
  * 
  * To run tests in UI Mode:
  * npx playwright test --ui
