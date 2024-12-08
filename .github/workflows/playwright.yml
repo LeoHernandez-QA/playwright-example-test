@@ -9,7 +9,7 @@ env:
   AZCOPY_SPA_APPLICATION_ID: '${{ secrets.AZCOPY_SPA_APPLICATION_ID }}'
   AZCOPY_SPA_CLIENT_SECRET: '${{ secrets.AZCOPY_SPA_CLIENT_SECRET }}'
   AZCOPY_TENANT_ID: '${{ secrets.AZCOPY_TENANT_ID }}'
-  AD_STORAGE_NAME: '${{ AD_STORAGE_NAME }}'
+  AD_STORAGE_NAME: '${{ vars.AD_STORAGE_NAME }}'
 jobs:
   test:
     timeout-minutes: 60
