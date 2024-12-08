@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [ main ]
 env:
-  storage: ${{ STORAGE_ACCOUNT_NAME }}
+  storage: ${{ vars.STORAGE_ACCOUNT_NAME }}
 jobs:
   test:
     timeout-minutes: 60
